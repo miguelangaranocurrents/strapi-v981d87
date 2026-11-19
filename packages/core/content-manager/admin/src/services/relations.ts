@@ -126,6 +126,14 @@ const relationsApi = contentManagerApi.injectEndpoints({
           endpointName,
           model: queryArgs.model,
           targetField: queryArgs.targetField,
+          /**
+           * `id` identifies the owning document/component. Several instances of the same
+           * component (e.g. two dynamic-zone carousels) share model + targetField, so they
+           * must not share a cache entry or they will show each other's available relations.
+           */
+          id: queryArgs.params?.id,
+          locale: queryArgs.params?.locale,
+          status: queryArgs.params?.status,
           _q: queryArgs.params?._q,
           idsToOmit: queryArgs.params?.idsToOmit,
           idsToInclude: queryArgs.params?.idsToInclude,
